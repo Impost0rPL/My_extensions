@@ -4,9 +4,10 @@
 - [LocateNow - Openguessr](#-locatenow)
 
 
-**===========================================================================**
 ## 📍 LocateNow
-
+<details>
+<summary>📖 Kliknij, aby rozwinąć pełny opis</summary>
+  
 Rozszerzenie do Edge/Chrome — odczytuje lokalizację z **OpenGuessr** i pokazuje kraj, miasto i dzielnicę oraz mini-mapkę **Google Maps**.
 
 ## Instalacja
@@ -25,3 +26,5 @@ Spakuj folder do ZIP (pliki na wierzchu) → Ustawienia → **Zainstaluj rozszer
 
 ## Licencja
 MIT
+
+</details>
