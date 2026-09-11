@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "LocateNow",
+  "version": "1.4",
+  "description": "Odczytuje lokalizację z OpenGuessr i pokazuje mini-mapkę.",
+  "permissions": ["activeTab"],
+  "host_permissions": [
+    "*://*.openguessr.com/*",
+    "*://openguessr.com/*",
+    "https://nominatim.openstreetmap.org/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.openguessr.com/*", "*://openguessr.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

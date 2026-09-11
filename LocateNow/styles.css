@@ -1,0 +1,340 @@
+/* ============================================================
+   PANEL Z WSPÓŁRZĘDNYMI
+   ============================================================ */
+#openguessr-locator-overlay {
+    position: fixed;
+    top: 20px;
+    left: 72px;
+    z-index: 999999;
+    background: rgba(20, 20, 30, 0.92);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border: 1px solid #444;
+    min-width: 230px;
+    max-width: calc(100vw - 100px);
+    user-select: text;
+    backdrop-filter: blur(6px);
+}
+
+.ogloc-title {
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #4fc3f7;
+    margin-bottom: 8px;
+}
+
+.ogloc-coords {
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.ogloc-geo {
+    border-top: 1px solid #444;
+    padding-top: 8px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.ogloc-geo-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 2px;
+}
+
+.ogloc-label {
+    color: #aaa;
+    font-size: 12px;
+    min-width: 78px;
+    flex-shrink: 0;
+}
+
+.ogloc-value {
+    font-weight: 600;
+    font-family: 'Consolas', 'Monaco', monospace;
+    color: #e0e0e0;
+    font-size: 13px;
+    word-break: break-word;
+}
+
+.ogloc-actions {
+    display: flex;
+    gap: 6px;
+    border-top: 1px solid #444;
+    padding-top: 8px;
+    flex-wrap: wrap;
+}
+
+.ogloc-btn {
+    flex: 1;
+    min-width: 100px;
+    background: #2a2a3a;
+    color: #ddd;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    font-family: inherit;
+    touch-action: manipulation;
+}
+
+.ogloc-btn:hover {
+    background: #3a3a5a;
+    border-color: #4fc3f7;
+    color: #fff;
+}
+
+.ogloc-btn-maps {
+    background: #1e3a5f;
+    border-color: #4fc3f7;
+    color: #e0f0ff;
+}
+
+.ogloc-btn-maps:hover {
+    background: #2a4a7a;
+}
+
+/* ============================================================
+   PRZYCISK UKRYWANIA
+   ============================================================ */
+#ogloc-toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999999;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(20, 20, 30, 0.9);
+    color: #fff;
+    border: 1px solid #444;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transition: background 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    touch-action: manipulation;
+}
+
+#ogloc-toggle-btn:hover {
+    background: rgba(40, 40, 60, 0.95);
+    transform: scale(1.1);
+}
+
+/* ============================================================
+   MINI-MAPKA GOOGLE MAPS – okno z resize i drag
+   ============================================================ */
+#ogloc-minimap {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 999999;
+    width: 480px;
+    height: 380px;
+    min-width: 220px;
+    min-height: 180px;
+    max-width: calc(100vw - 10px);
+    max-height: calc(100vh - 10px);
+    background: rgba(20, 20, 30, 0.95);
+    border: 1px solid #444;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    backdrop-filter: blur(6px);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none; /* kluczowe dla płynnego drag/resize na mobile */
+}
+
+.ogloc-minimap-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 12px;
+    color: #4fc3f7;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #444;
+    background: rgba(10, 10, 20, 0.85);
+    flex-shrink: 0;
+    cursor: grab;
+    touch-action: none;
+}
+
+.ogloc-minimap-header:active {
+    cursor: grabbing;
+}
+
+.ogloc-minimap-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.ogloc-minimap-btn {
+    background: transparent;
+    border: 1px solid #555;
+    color: #ddd;
+    min-width: 26px;
+    height: 24px;
+    padding: 0 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    touch-action: manipulation;
+}
+
+.ogloc-minimap-btn:hover {
+    background: rgba(40, 40, 60, 0.95);
+    border-color: #4fc3f7;
+    color: #fff;
+}
+
+.ogloc-minimap-close:hover {
+    background: #5a1e1e;
+    border-color: #c94b4b;
+    color: #fff;
+}
+
+#ogloc-minimap-frame {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    display: block;
+    background: #111;
+    min-height: 0;
+}
+
+/* Uchwyt zmiany rozmiaru w prawym dolnym rogu */
+.ogloc-resize-handle {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 22px;
+    height: 22px;
+    cursor: nwse-resize;
+    background: linear-gradient(135deg,
+        transparent 0%, transparent 45%,
+        #4fc3f7 45%, #4fc3f7 55%,
+        transparent 55%, transparent 65%,
+        #4fc3f7 65%, #4fc3f7 75%,
+        transparent 75%);
+    opacity: 0.7;
+    z-index: 10;
+    touch-action: none;
+}
+
+.ogloc-resize-handle:hover {
+    opacity: 1;
+}
+
+/* ============================================================
+   KLUCZOWE: wyłącz iframe podczas drag/resize
+   – dzięki temu iframe nie "pożera" ruchów myszki
+   ============================================================ */
+#ogloc-minimap.ogloc-dragging #ogloc-minimap-frame,
+#ogloc-minimap.ogloc-resizing #ogloc-minimap-frame {
+    pointer-events: none !important;
+}
+
+#ogloc-minimap.ogloc-resizing,
+#ogloc-minimap.ogloc-dragging {
+    /* Żeby uniknąć migotania podczas resize */
+    will-change: width, height, left, top;
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+#ogloc-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    z-index: 999999;
+    background: rgba(20, 20, 30, 0.95);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 14px;
+    border: 1px solid #444;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+    max-width: calc(100vw - 40px);
+    text-align: center;
+}
+
+#ogloc-toast.ogloc-toast-show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   RESPONSYWNOŚĆ – EKRANY MOBILNE
+   ============================================================ */
+@media (max-width: 768px) {
+    #openguessr-locator-overlay {
+        top: 10px;
+        left: 66px;
+        right: 10px;
+        padding: 10px 12px;
+        font-size: 13px;
+        min-width: unset;
+        max-width: unset;
+    }
+
+    .ogloc-title { font-size: 12px; margin-bottom: 6px; }
+    .ogloc-label { font-size: 11px; min-width: 68px; }
+    .ogloc-value { font-size: 12px; }
+    .ogloc-btn { padding: 8px 8px; font-size: 12px; min-width: 80px; }
+
+    #ogloc-toggle-btn {
+        top: 10px;
+        left: 10px;
+        width: 46px;
+        height: 46px;
+        font-size: 20px;
+    }
+
+    #ogloc-minimap {
+        bottom: 10px;
+        left: 10px;
+        width: calc(100vw - 20px);
+        height: min(280px, 45vh);
+    }
+
+    .ogloc-minimap-header { padding: 8px 10px; font-size: 12px; }
+    .ogloc-minimap-btn { min-width: 32px; height: 30px; font-size: 14px; }
+    .ogloc-resize-handle { width: 28px; height: 28px; }
+
+    #ogloc-toast { bottom: 15px; font-size: 13px; padding: 8px 14px; }
+}
+
+@media (max-width: 380px) {
+    #openguessr-locator-overlay { left: 62px; }
+    #ogloc-toggle-btn { width: 42px; height: 42px; }
+}
