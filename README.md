@@ -7,7 +7,7 @@ Rozszerzenie do Edge/Chrome — odczytuje lokalizację z **OpenGuessr** i pokazu
 ## Instalacja
 
 **Edge / Chrome:**
-1. Pobierz repo (Code → Download ZIP) i rozpakuj.
+1. Pobierz repo (Release → LocateNow.zip) i rozpakuj.
 2. `edge://extensions/` → **Tryb dewelopera** → **Załaduj rozpakowane** → wskaż folder.
 
 **Lemur Browser (Android):**
